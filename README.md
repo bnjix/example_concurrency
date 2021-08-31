@@ -9,3 +9,7 @@ Getting started:
 * `bundle install`
 * `bundle exec rake db:create`
 * `bundle exec rake db:migrate`
+
+Once the setup is complete, all examples are meant to be run from a console like so:
+* `rails c`
+* `Examples::SimpleTransaction.demo`
