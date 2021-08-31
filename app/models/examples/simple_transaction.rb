@@ -6,7 +6,8 @@ module Examples
     end
 
     def demo
-      visible_puts("In this example, we implement the code necessary for the user to pay for its current cart. Starting cart state: :unpaid, user balance: 10000")
+      visible_puts("In this example, we implement the code necessary for the user to pay for its current cart. Starting cart state: :unpaid, user balance: 10000\
+        Transactions are useful to guarantee that every operation either succeeds completely, or fails completely. https://en.wikipedia.org/wiki/ACID")
       example_without_transaction
       example_with_transaction
     end
@@ -15,13 +16,13 @@ module Examples
       user = new_user
       cart = new_cart(user: user)
       make_update_ruby_survives(user: user, cart: cart)
-      visible_puts("No transaction ruby lives; user balance #{ user.balance_cents }, cart state: #{ cart.payment_state }")
+      results("No transaction ruby lives", user: user, cart: cart)
 
       user2 = new_user
       cart2 = new_cart(user: user2)
       make_update_ruby_dies(user: user2, cart: cart2)
       rescue
-      visible_puts("No transaction ruby dies; user balance #{ user2.reload.balance_cents }, cart state: #{ cart2.payment_state }")
+      results("No transaction ruby dies", user: user2, cart: cart2)
     end
 
     def example_with_transaction
@@ -31,7 +32,7 @@ module Examples
       user.transaction do
         make_update_ruby_survives(user: user, cart: cart)
       end
-      visible_puts("WITH transaction ruby lives; user balance #{ user.balance_cents }, cart state: #{ cart.payment_state }")
+      results("WITH transaction ruby lives", user: user, cart: cart)
 
       user2 = new_user
       cart2 = new_cart(user: user2)
@@ -40,7 +41,7 @@ module Examples
         make_update_ruby_dies(user: user2, cart: cart2)
       end
       rescue
-      visible_puts("WITH transaction ruby dies; user balance #{ user2.reload.balance_cents }, cart state: #{ cart2.payment_state }")
+      results("WITH transaction ruby dies", user: user2, cart: cart2)
     end
 
     def make_update_ruby_survives(user:, cart:)
@@ -64,6 +65,13 @@ module Examples
 
     def new_cart(user:)
       Cart.create!(user: user, price_cents: 50_00, payment_state: :unpaid)
+    end
+
+    def results(message, user:, cart:)
+      balance_cents = user.reload.balance_cents
+      cart_state = cart.reload.payment_state
+      success_str = (balance_cents == 50_00 && cart_state.to_sym == :paid) || (balance_cents == 100_00 && cart_state.to_sym == :unpaid)
+      visible_puts("#{ message }, user balance #{ balance_cents }, cart state: #{ cart_state }, success: #{ success_str }")
     end
 
     def visible_puts(msg)
