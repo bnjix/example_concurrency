@@ -3,7 +3,6 @@ module Examples
     def self.demo
       new.demo
     end
-    # Race condition to fix
 
     def demo
       visible_puts("In this example, we simulate what happens if the same user tries to create 2 carts in short succession.\

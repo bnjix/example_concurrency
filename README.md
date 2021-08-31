@@ -1,24 +1,13 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A few examples of common concurrency issues and their answers with Rails/Postgres.
+All the examples live in the folder: [here](app/models/examples)
 
-Things you may want to cover:
 
 * Ruby version
-
+2.7.2
 * System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+bundle install
+* Database creation/initialization
+bundle exec rake db:create
+bundle exec rake db:migrate
