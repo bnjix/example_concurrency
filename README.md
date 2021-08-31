@@ -1,7 +1,7 @@
 # README
 
 A few examples of common concurrency issues and their answers with Rails/Postgres.
-All the examples live in the folder: [here](app/models/examples)
+All the examples live in the "examples" folder [here](app/models/examples)
 
 Getting started:
 
@@ -9,5 +9,3 @@ Getting started:
 * `bundle install`
 * `bundle exec rake db:create`
 * `bundle exec rake db:migrate`
-
-
