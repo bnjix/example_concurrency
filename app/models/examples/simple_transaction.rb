@@ -1,5 +1,6 @@
 module Examples
   class SimpleTransaction
+    # Add another example for concurrent transaction
     def self.demo
       new.demo
     end
@@ -35,7 +36,22 @@ module Examples
       user2 = new_user
       cart2 = new_cart(user: user2)
 
-      user2.transaction do
+      # User.transaction
+      # User.find(12345).transaction
+
+      # User < ActiveRecord::Base
+      # AnotherDBUser < AnotherDBRecord
+      User.transaction {
+        do_something
+        do_something
+      }
+
+
+
+      User.transaction
+      AnotherDBUser.transaction
+
+      ActiveRecord::Base.transaction do
         make_update_ruby_dies(user: user2, cart: cart2)
       end
       rescue
