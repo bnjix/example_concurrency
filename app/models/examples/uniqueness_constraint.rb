@@ -7,7 +7,8 @@ module Examples
 
     def demo
       visible_puts("In this example, we simulate what happens if the same user tries to create 2 carts in short succession.\
-        This can happen if there's a client bug triggering 2 request to come very close together. Users can only have one cart")
+        This can happen if there's a client bug triggering 2 request to come very close together. Users can only have one cart.\
+        The only way to guarantee this is to use a DB uniqueness constraint")
       example_without_uniqueness_constraint
       example_with_uniqueness_constraint
     end
@@ -26,12 +27,14 @@ module Examples
       2.times.map do
         Thread.new { first_or_create(model, user) }
       end.each(&:join)
-      visible_puts("Resulting cart count: #{ model.where(user: user).count }")
+      cart_count = model.where(user: user).count
+      visible_puts("Resulting cart count: #{ cart_count }, success: #{ cart_count == 1 }")
     end
 
     def first_or_create(model, user)
       # Check if a cart already exists for this person...
-      existing_cart = model.where(user: user)
+      existing_cart = model.where(user: user).first # Add first at the end to force DB hit
+
       # pause for a bit because we're busy doing something else...
       sleep(1)
       # insert a new row because we couldn't find any when we checked

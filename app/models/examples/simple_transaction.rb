@@ -1,6 +1,5 @@
 module Examples
   class SimpleTransaction
-    # Add another example for concurrent transaction
     def self.demo
       new.demo
     end
