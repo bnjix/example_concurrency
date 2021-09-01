@@ -34,9 +34,9 @@ module Examples
 
       2.times.map do |t|
         user = User.create!(name: NAMES[t])
-        t = Thread.new { redeem_coupon(user: user, with_lock: with_lock, with_transaction: with_transaction) }
-        sleep(0.1) # Because the second user comes in a bit later than the first one
-        t
+        Thread.new { redeem_coupon(user: user, with_lock: with_lock, with_transaction: with_transaction) }.tap do |t|
+          sleep(0.1) # Because the second user comes in a bit later than the first one
+        end
       end.each(&:join)
       user_name = coupon.reload.user.name
       visible_puts("coupon redeemed by #{ user_name }, #{ user_name == "James" ? "(Success)" : "(Fail)" }")
