@@ -5,7 +5,10 @@ module Examples
     end
 
     def demo
-      visible_puts("In this example, we demonstrate that class instance variables are not thread safe in Ruby")
+      visible_puts("In this example, we demonstrate that class instance variables are not thread safe in Ruby \n\
+        Ruby classes are instances themselves (instances of class Class). (#{ ExampleClass.class }). https://stackoverflow.com/a/9311665\n\
+        https://bearmetal.eu/theden/how-do-i-know-whether-my-rails-app-is-thread-safe-or-not/")
+
       example
     end
 

@@ -7,7 +7,8 @@ module Examples
     end
 
     def demo
-      visible_puts("In this example, we simulate what happens if 2 different users try to access the same shared resource. James is here first so he's expected to get the coupon")
+      visible_puts("In this example, we simulate what happens if 2 different users try to access the same shared resource. James is here first so he's expected to get the coupon.\n\
+        We use `lock` in conjunction with a transaction to mitigate the issue -- https://api.rubyonrails.org/classes/ActiveRecord/Locking/Pessimistic.html")
       Coupon.delete_all
       User.delete_all
       example_without_locking

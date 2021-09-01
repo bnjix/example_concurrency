@@ -5,8 +5,9 @@ module Examples
     end
 
     def demo
-      visible_puts("In this example, we implement the code necessary for the user to pay for its current cart. Starting cart state: :unpaid, user balance: 10000\
-        Transactions are useful to guarantee that every operation either succeeds completely, or fails completely. https://en.wikipedia.org/wiki/ACID")
+      visible_puts("In this example, we implement the code necessary for the user to pay for its current cart. Starting cart state: :unpaid, user balance: 10000\n\
+        Transactions are useful to guarantee that every operation either succeeds completely, or fails completely. \n\
+        https://en.wikipedia.org/wiki/ACID; https://www.postgresqltutorial.com/postgresql-transaction/; https://www.postgresql.org/docs/8.3/tutorial-transactions.html")
       example_without_transaction
       example_with_transaction
     end

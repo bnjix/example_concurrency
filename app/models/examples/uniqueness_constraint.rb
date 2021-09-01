@@ -7,7 +7,7 @@ module Examples
     def demo
       visible_puts("In this example, we simulate what happens if the same user tries to create 2 carts in short succession.\
         This can happen if there's a client bug triggering 2 request to come very close together. Users can only have one cart.\
-        The only way to guarantee this is to use a DB uniqueness constraint")
+        The only way to guarantee this is to use a DB uniqueness constraint -- https://www.postgresqltutorial.com/postgresql-unique-constraint/")
       example_without_uniqueness_constraint
       example_with_uniqueness_constraint
     end
