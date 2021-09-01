@@ -1,7 +1,9 @@
 # README
 
-A few examples of common concurrency issues and their answers with Rails/Postgres.
-All the examples live in the "examples" folder [here](app/models/examples)
+A few examples of common concurrency issues and their possible answers with Rails/Postgres.
+
+Everything lives in the "examples" folder [here](app/models/examples). It is suggested to go through them in order.
+This is meant to be interactive and playing with the code is highly encouraged. Inserting `byebug` anywhere will give you a breakpoint -- [byebug](https://github.com/deivid-rodriguez/byebug)
 
 Getting started:
 
@@ -10,6 +12,6 @@ Getting started:
 * `bundle exec rake db:create`
 * `bundle exec rake db:migrate`
 
-Once the setup is complete, all examples are meant to be run from a console like so:
+Once the setup is complete, examples are meant to be run from a console like so:
 * `rails c`
-* `Examples::SimpleTransaction.demo`
+* `Examples::E1::SimpleTransaction.demo`
